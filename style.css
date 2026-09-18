@@ -1,0 +1,649 @@
+/* =====================================================
+   PULSECARE - PORTABLE ECG MONITORING SYSTEM
+   STYLE.CSS
+   ===================================================== */
+
+
+/* ================= GENERAL ================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+}
+
+button {
+    font-family: inherit;
+}
+
+
+/* ================= APP LAYOUT ================= */
+
+.app {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* ================= SIDEBAR ================= */
+
+.sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background: #111827;
+    padding: 28px 18px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+/* Navigation */
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar nav button {
+    border: none;
+    background: transparent;
+    color: #cbd5e1;
+    text-align: left;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar nav button:hover {
+    background: #1f2937;
+    color: white;
+}
+
+
+/* ================= MAIN ================= */
+
+.main {
+    margin-left: 250px;
+    width: calc(100% - 250px);
+    padding: 40px;
+}
+
+
+/* ================= PAGE ================= */
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+
+/* ================= HEADINGS ================= */
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+    color: #111827;
+}
+
+h2 {
+    color: #111827;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 30px;
+    font-size: 15px;
+}
+
+
+/* ================= DASHBOARD CARDS ================= */
+
+.cards {
+    display: grid;
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.07);
+}
+
+.card h3 {
+    font-size: 15px;
+    color: #64748b;
+    margin-bottom: 18px;
+}
+
+.card p {
+    margin-top: 10px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+
+/* Big number */
+
+.big-number {
+    font-size: 30px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+
+/* ================= STATUS ================= */
+
+.status {
+    display: inline-block;
+    padding: 7px 13px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.status.online {
+    background: #dcfce7;
+    color: #15803d;
+}
+
+
+/* ================= CHART CARD ================= */
+
+.chart-card {
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    margin-top: 25px;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.07);
+}
+
+.chart-card h2 {
+    margin-bottom: 20px;
+}
+
+
+/* ================= DEMO NOTE ================= */
+
+.demo-note {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #94a3b8;
+    text-align: center;
+}
+
+
+/* ================= SYSTEM FLOW ================= */
+
+.flow-card {
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    margin-top: 25px;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.07);
+}
+
+.flow-card h2 {
+    margin-bottom: 25px;
+}
+
+.flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.flow div {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1d4ed8;
+    padding: 13px 17px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.flow span {
+    font-size: 22px;
+    color: #64748b;
+}
+
+
+/* ================= LIVE ECG ================= */
+
+.live-top {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.heart-rate-box,
+.sensor-box {
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.07);
+}
+
+.heart-rate-box h3,
+.sensor-box h3 {
+    color: #64748b;
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.live-bpm {
+    font-size: 40px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.sensor-box p {
+    color: #94a3b8;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+
+/* ================= ACTION BUTTONS ================= */
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap;
+}
+
+.primary-btn,
+.secondary-btn {
+    border: none;
+    padding: 14px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.primary-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.primary-btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.secondary-btn {
+    background: #e0e7ff;
+    color: #3730a3;
+}
+
+.secondary-btn:hover {
+    background: #c7d2fe;
+    transform: translateY(-2px);
+}
+
+
+/* ================= HISTORY ================= */
+
+#historyContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.history-card {
+    background: white;
+    padding: 22px 25px;
+    border-radius: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.06);
+}
+
+.history-card h3 {
+    margin-bottom: 7px;
+    color: #111827;
+}
+
+.history-card p {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.history-bpm {
+    font-size: 22px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.empty-history {
+    background: white;
+    padding: 45px;
+    border-radius: 15px;
+    text-align: center;
+    color: #94a3b8;
+}
+
+
+/* =====================================================
+   SESSION COMPARISON
+   ===================================================== */
+
+
+/* Current / Previous */
+
+.comparison-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.comparison-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.07);
+    text-align: center;
+}
+
+.comparison-card h2 {
+    font-size: 19px;
+    margin-bottom: 20px;
+}
+
+.comparison-card.current {
+    border-top: 4px solid #2563eb;
+}
+
+.comparison-card.previous {
+    border-top: 4px solid #64748b;
+}
+
+.comparison-bpm {
+    font-size: 40px;
+    font-weight: bold;
+    color: #2563eb;
+    margin-bottom: 12px;
+}
+
+.comparison-card.previous .comparison-bpm {
+    color: #475569;
+}
+
+.comparison-card p {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+
+/* ================= DIFFERENCE ================= */
+
+.difference-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.07);
+    margin-bottom: 25px;
+}
+
+.difference-card h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.difference-number {
+    font-size: 36px;
+    font-weight: bold;
+    color: #2563eb;
+    margin-bottom: 10px;
+}
+
+.difference-card p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* ================= COMPARISON CHART ================= */
+
+.comparison-chart-card {
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.07);
+    margin-bottom: 25px;
+}
+
+.comparison-chart-card h2 {
+    margin-bottom: 20px;
+}
+
+
+/* ================= SUMMARY ================= */
+
+.summary-card {
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.07);
+}
+
+.summary-card h2 {
+    margin-bottom: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-row span {
+    color: #64748b;
+}
+
+.summary-row strong {
+    color: #111827;
+}
+
+
+/* ================= HOW IT WORKS ================= */
+
+.steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.step {
+    background: white;
+    padding: 25px;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.06);
+}
+
+.step h2 {
+    font-size: 19px;
+    margin-bottom: 12px;
+}
+
+.step p {
+    color: #64748b;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+
+/* ================= ABOUT ================= */
+
+.about-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow:
+        0 5px 20px rgba(15, 23, 42, 0.07);
+}
+
+.about-card h2 {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.about-card h2:first-child {
+    margin-top: 0;
+}
+
+.about-card p {
+    color: #64748b;
+    line-height: 1.7;
+    margin-bottom: 15px;
+}
+
+.about-card ul {
+    padding-left: 25px;
+    color: #64748b;
+    line-height: 2;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1100px) {
+
+    .cards {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .main {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+        padding: 25px;
+    }
+
+    .live-top,
+    .comparison-grid,
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .app {
+        display: block;
+    }
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        min-height: auto;
+        padding: 20px;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+    }
+
+    .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .sidebar nav button {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .main {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    h1 {
+        font-size: 27px;
+    }
+
+    .history-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .flow {
+        flex-direction: column;
+    }
+
+    .flow span {
+        transform: rotate(90deg);
+    }
+
+}

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PulseCare - Portable ECG Monitoring System</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="logo">
+            PULSECARE
+        </div>
+
+        <nav>
+            <button onclick="showPage('dashboard')">Dashboard</button>
+            <button onclick="showPage('live')">Live ECG</button>
+            <button onclick="showPage('history')">History</button>
+            <button onclick="showPage('compare')">Session Comparison</button>
+            <button onclick="showPage('how')">How It Works</button>
+            <button onclick="showPage('about')">About</button>
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section id="dashboard" class="page active">
+
+            <h1>Dashboard</h1>
+            <p class="subtitle">
+                Portable ECG Monitoring System
+            </p>
+
+            <div class="cards">
+
+                <div class="card">
+                    <h3>Current Heart Rate</h3>
+                    <div class="big-number">
+                        <span id="dashboardBPM">72</span> BPM
+                    </div>
+                    <p>Prototype reading</p>
+                </div>
+
+                <div class="card">
+                    <h3>ECG Sensor Status</h3>
+                    <div class="status online">
+                        Connected
+                    </div>
+                    <p>AD8232 ECG Sensor</p>
+                </div>
+
+                <div class="card">
+                    <h3>Microcontroller Status</h3>
+                    <div class="status online">
+                        Connected
+                    </div>
+                    <p>Arduino UNO</p>
+                </div>
+
+                <div class="card">
+                    <h3>Recorded Sessions</h3>
+                    <div class="big-number">
+                        <span id="sessionCount">0</span>
+                    </div>
+                    <p>Saved sessions</p>
+                </div>
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <h2>ECG Waveform</h2>
+
+                <canvas id="dashboardChart"></canvas>
+
+                <p class="demo-note">
+                    Demonstration waveform for prototype presentation.
+                    It is not a medical measurement.
+                </p>
+
+            </div>
+
+
+            <div class="flow-card">
+
+                <h2>System Working Flow</h2>
+
+                <div class="flow">
+
+                    <div>ECG Electrodes</div>
+                    <span>→</span>
+
+                    <div>AD8232 ECG Sensor</div>
+                    <span>→</span>
+
+                    <div>Arduino UNO</div>
+                    <span>→</span>
+
+                    <div>Signal Processing</div>
+                    <span>→</span>
+
+                    <div>OLED Display</div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= LIVE ECG ================= -->
+
+        <section id="live" class="page">
+
+            <h1>Live ECG</h1>
+
+            <p class="subtitle">
+                Monitor the ECG waveform in real time.
+            </p>
+
+
+            <div class="live-top">
+
+                <div class="heart-rate-box">
+
+                    <h3>Current Heart Rate</h3>
+
+                    <div class="live-bpm">
+                        <span id="liveBPM">72</span> BPM
+                    </div>
+
+                </div>
+
+
+                <div class="sensor-box">
+
+                    <h3>Sensor Status</h3>
+
+                    <div class="status online">
+                        Connected
+                    </div>
+
+                    <p>AD8232 + Arduino UNO</p>
+
+                </div>
+
+            </div>
+
+
+            <div class="chart-card">
+
+                <h2>Live ECG Waveform</h2>
+
+                <canvas id="liveChart"></canvas>
+
+                <p class="demo-note">
+                    The waveform shown here is simulated for the prototype website.
+                </p>
+
+            </div>
+
+
+            <!-- BUTTONS -->
+
+            <div class="action-buttons">
+
+                <button class="primary-btn" onclick="saveSession()">
+                    Save Session
+                </button>
+
+                <button class="secondary-btn" onclick="comparePrevious()">
+                    Compare with Previous Session
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= HISTORY ================= -->
+
+        <section id="history" class="page">
+
+            <h1>History</h1>
+
+            <p class="subtitle">
+                View your previously saved prototype sessions.
+            </p>
+
+
+            <div id="historyContainer">
+
+                <div class="empty-history">
+                    No sessions saved yet.
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= COMPARISON ================= -->
+
+        <section id="compare" class="page">
+
+            <h1>Session Comparison</h1>
+
+            <p class="subtitle">
+                Compare the current session with a previously saved session.
+            </p>
+
+
+            <!-- SESSION INFORMATION -->
+
+            <div class="comparison-grid">
+
+                <div class="comparison-card current">
+
+                    <h2>Current Session</h2>
+
+                    <div class="comparison-bpm">
+                        <span id="currentCompareBPM">72</span> BPM
+                    </div>
+
+                    <p id="currentCompareDate">
+                        Current Session
+                    </p>
+
+                </div>
+
+
+                <div class="comparison-card previous">
+
+                    <h2>Previous Session</h2>
+
+                    <div class="comparison-bpm">
+                        <span id="previousCompareBPM">--</span>
+                        <span id="previousBPMText">BPM</span>
+                    </div>
+
+                    <p id="previousCompareDate">
+                        No previous session
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- DIFFERENCE -->
+
+            <div class="difference-card">
+
+                <h2>Heart Rate Difference</h2>
+
+                <div class="difference-number">
+                    <span id="differenceValue">--</span> BPM
+                </div>
+
+                <p id="differenceText">
+                    Save at least one previous session to compare.
+                </p>
+
+            </div>
+
+
+            <!-- WAVEFORM COMPARISON -->
+
+            <div class="comparison-chart-card">
+
+                <h2>ECG Waveform Comparison</h2>
+
+                <canvas id="comparisonChart"></canvas>
+
+                <p class="demo-note">
+                    Both waveforms are demonstration data for the prototype.
+                </p>
+
+            </div>
+
+
+            <!-- SUMMARY -->
+
+            <div class="summary-card">
+
+                <h2>Comparison Summary</h2>
+
+                <div class="summary-row">
+                    <span>Current Session</span>
+                    <strong id="summaryCurrent">72 BPM</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Previous Session</span>
+                    <strong id="summaryPrevious">--</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Difference</span>
+                    <strong id="summaryDifference">--</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Comparison</span>
+                    <strong id="comparisonResult">--</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section id="how" class="page">
+
+            <h1>How It Works</h1>
+
+            <p class="subtitle">
+                Working process of the Portable ECG Monitoring System.
+            </p>
+
+
+            <div class="steps">
+
+                <div class="step">
+                    <h2>1. ECG Electrodes</h2>
+                    <p>
+                        ECG electrodes detect the electrical activity
+                        of the heart and send the signal to the ECG sensor.
+                    </p>
+                </div>
+
+
+                <div class="step">
+                    <h2>2. AD8232 ECG Sensor</h2>
+                    <p>
+                        The AD8232 receives and conditions the ECG signal
+                        so that it can be processed by the microcontroller.
+                    </p>
+                </div>
+
+
+                <div class="step">
+                    <h2>3. Arduino UNO</h2>
+                    <p>
+                        Arduino reads the analog ECG signal and processes
+                        the incoming data.
+                    </p>
+                </div>
+
+
+                <div class="step">
+                    <h2>4. Signal Processing</h2>
+                    <p>
+                        The ECG signal is processed to obtain useful
+                        information such as the heart-rate value.
+                    </p>
+                </div>
+
+
+                <div class="step">
+                    <h2>5. OLED Display</h2>
+                    <p>
+                        The processed information can be displayed on
+                        the OLED screen for easy viewing.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ================= ABOUT ================= -->
+
+        <section id="about" class="page">
+
+            <h1>About</h1>
+
+            <p class="subtitle">
+                Portable ECG Monitoring System
+            </p>
+
+
+            <div class="about-card">
+
+                <h2>Project Overview</h2>
+
+                <p>
+                    PulseCare is an academic prototype designed to
+                    demonstrate portable ECG signal monitoring.
+                </p>
+
+                <p>
+                    The system uses ECG electrodes, an AD8232 ECG sensor,
+                    Arduino UNO and an OLED display to demonstrate the
+                    acquisition and display of ECG signals.
+                </p>
+
+                <h2>Prototype Components</h2>
+
+                <ul>
+                    <li>ECG Electrodes</li>
+                    <li>AD8232 ECG Sensor</li>
+                    <li>Arduino UNO</li>
+                    <li>0.96-inch OLED Display</li>
+                    <li>Portable Power Supply</li>
+                </ul>
+
+                <p class="demo-note">
+                    This website is an educational prototype interface
+                    and is not intended for medical diagnosis.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+   
+
+
+            
